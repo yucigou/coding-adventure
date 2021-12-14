@@ -8,11 +8,11 @@
     <script type="text/javascript">
       var dashboard;
 
-      function embedDashboard() {
+      function embedDashboard(url) {
         var containerDiv = document.getElementById("embeddingContainer");
         var options = {
           // replace this dummy url with the one generated via embedding API
-          url: "https://eu-west-1.quicksight.aws.amazon.com/embed/a22ceec9435a48dd8fa76f10657316a1/dashboards/01bb1f4d-1e02-4674-8ae5-c1d738b36080?isauthcode=true&identityprovider=quicksight&code=AYABeCwCjAJVl6FlumY-XNlyaIYAAAABAAdhd3Mta21zAEthcm46YXdzOmttczpldS13ZXN0LTE6MzU2MzA1MTgzMDczOmtleS83ZTYwMTNkMC0xM2I0LTRmODItYmI1NC00YjllMTM4NzczNjYAuAECAQB4mmfdaL-WJblO_x3fgpluVFAFiuT29EIrIJ6BR4V1br8BniX6ylXNuwmLUuX3Lc4QxAAAAH4wfAYJKoZIhvcNAQcGoG8wbQIBADBoBgkqhkiG9w0BBwEwHgYJYIZIAWUDBAEuMBEEDG8eDEaA8R39BPwDBAIBEIA7cceYE3jDxkygca4Lblsq4mZp1NmFILOftxYiq5h0-E2KRtH5MbZ_C-Yj1MEjdeiOZjg5AU9lwZI6Pk8CAAAAAAwAABAAAAAAAAAAAAAAAAAAGF3jjcVm1a4EVwRF9lwyv_____8AAAABAAAAAAAAAAAAAAABAAAAnkfSke-DkChCBYcuSRT6pk9TRaScNVXAvaQUhf9A5QVnolrRmjpHzakF3mV6cMTcYq-gDI1yDExnOgZuK6QdkbnB1sWksx-sQlOhgOlYvq4p96-FWnJgmQAS2fNH7Wxo2Lrz_pER-MXropgGvaRuZW2wyLbuReH_M-kri7Okki6ahf4GZx_lvXsEz3mB5DWwJbckypSwkhHFnz4p9s4Mp-mXdX5defImxGIl05vPzA%3D%3D",
+          url,
           container: containerDiv,
           scrolling: "no",
           height: "700px",
@@ -27,10 +27,16 @@
         };
         dashboard = QuickSightEmbedding.embedDashboard(options);
       }
+
+      function loadDashBoard() {
+        const urlSearchParams = new URLSearchParams(window.location.search);
+        const params = Object.fromEntries(urlSearchParams.entries());
+        embedDashboard(params["embedded_url"]);
+      }
     </script>
   </head>
 
-  <body onload="embedDashboard()">
+  <body onload="loadDashBoard()">
     <div id="embeddingContainer"></div>
   </body>
 </html>
