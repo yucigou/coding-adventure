@@ -1,12 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Basic Embed</title>
+    <!-- You can download the latest QuickSight embedding SDK version from https://www.npmjs.com/package/amazon-quicksight-embedding-sdk -->
+    <!-- Or you can do "npm install amazon-quicksight-embedding-sdk", if you use npm for javascript dependencies -->
+    <script src="https://unpkg.com/amazon-quicksight-embedding-sdk@1.0.15/dist/quicksight-embedding-js-sdk.min.js"></script>
+    <script type="text/javascript">
+      var dashboard;
+
+      function embedDashboard() {
+        var containerDiv = document.getElementById("embeddingContainer");
+        var options = {
+          // replace this dummy url with the one generated via embedding API
+          url: "https://eu-west-1.quicksight.aws.amazon.com/embed/57994af92fb5494d922faec5a6bc82da/dashboards/01bb1f4d-1e02-4674-8ae5-c1d738b36080?isauthcode=true&identityprovider=quicksight&code=AYABeGXPRBS-CLdpUfDs6AQq4F0AAAABAAdhd3Mta21zAEthcm46YXdzOmttczpldS13ZXN0LTE6MzU2MzA1MTgzMDczOmtleS83ZTYwMTNkMC0xM2I0LTRmODItYmI1NC00YjllMTM4NzczNjYAuAECAQB4mmfdaL-WJblO_x3fgpluVFAFiuT29EIrIJ6BR4V1br8BKtwLWPotcHKu59f4M3idpwAAAH4wfAYJKoZIhvcNAQcGoG8wbQIBADBoBgkqhkiG9w0BBwEwHgYJYIZIAWUDBAEuMBEEDFQFSGEloNCUfN0iWAIBEIA7WSn4HmdpsCJqSmwXgAwLjMkYClKSNYdACUmWeSKA-Kip0VIV26wKhpvGeW-_IbVYzUih8ULL-7fw6WACAAAAAAwAABAAAAAAAAAAAAAAAAAA_RTseIV0htyxM4a0XeuM_P____8AAAABAAAAAAAAAAAAAAABAAAAnvy--Whefgb0s3iSKRsdhuiOEHu-BgIhhGg3H8Jx9X0Q3BwROocZqNy0LiYG3pLJmYIfuK4CcRHnelctjfa7tc7prQIWfiuuFsilDIovKHiA3mRgXvYX1T_PBHhkW5kXt7BrsIGabF6Iem-vEBJPLm5ZO2peQXmOaSAPaw9BAMepcVsmezzWDolNgdCwgMAq0Ezh45LA2eBMp0DMg-kxaRXRHwGOtLp5wFKUlMRzOw%3D%3D",
+          container: containerDiv,
+          scrolling: "no",
+          height: "700px",
+          iframeResizeOnSheetChange: false, // use this option in combination with height: AutoFit,
+          // to allow iframe height to resize dynamically, based on sheet height, on changing sheets.
+          width: "1000px",
+          footerPaddingEnabled: true,
+          sheetId: "YOUR_SHEETID", // use this option to specify initial sheet id to load for the embedded dashboard
+          sheetTabsDisabled: false, // use this option to enable or disable sheet tab controls
+          undoRedoDisabled: false, // use this option to disable undo and redo buttons
+          resetDisabled: false, // use this option to disable reset button
+        };
+        dashboard = QuickSightEmbedding.embedDashboard(options);
+      }
+    </script>
   </head>
-  <body>
-    <h1>QS Dashboard</h1>
+
+  <body onload="embedDashboard()">
+    <div id="embeddingContainer"></div>
   </body>
 </html>
